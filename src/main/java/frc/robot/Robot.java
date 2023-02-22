@@ -91,6 +91,8 @@ public class Robot extends TimedRobot {
 
 
       if (primaryDriver.getXButton()) {
+
+        camera.setPipelineIndex(1);
           // Vision-alignment mode
           // Query the latest result from PhotonVision
 
@@ -142,6 +144,26 @@ public class Robot extends TimedRobot {
       }
 
       SmartDashboard.putNumber("Latency", latencySeconds);
+
+      if (primaryDriver.getYButton()) {
+        
+        camera.setDriverMode(false);
+        camera.setPipelineIndex(2);
+
+      }
+
+      if (primaryDriver.getBButton()) {
+
+        camera.setDriverMode(false);
+        camera.setPipelineIndex(3);
+
+      }
+
+      if (primaryDriver.getAButton()) {
+
+        camera.setDriverMode(true);
+
+      }
 
   }
 }
