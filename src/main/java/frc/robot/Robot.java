@@ -11,18 +11,13 @@ package frc.robot;
 import org.photonvision.PhotonCamera;
 import org.photonvision.PhotonUtils;
 import org.photonvision.targeting.PhotonTrackedTarget;
-
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import frc.robot.vision.visionmovement;
 import edu.wpi.first.net.PortForwarder;
 
 
@@ -84,15 +79,15 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
 
-      double forwardSpeed = 0;
-      double rotationSpeed = 0;
-
-    //Variable declarations
+      //Variable declarations
       var result = camera.getLatestResult();
-      boolean hasTargets = result.hasTargets();
       PhotonTrackedTarget target = result.getBestTarget();
       camera.setDriverMode(false);
       double latencySeconds = result.getLatencyMillis() / 1000.0;
+
+
+      double forwardSpeed = 0;
+      double rotationSpeed = 0;
 
 
       if (primaryDriver.getXButton()) {
@@ -150,6 +145,8 @@ public class Robot extends TimedRobot {
 
   }
 }
+
+
 
 
 //Old drivetrain code
