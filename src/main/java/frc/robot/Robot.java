@@ -57,7 +57,7 @@ public class Robot extends TimedRobot {
   private final WPI_TalonSRX m_rightMotor1 = new WPI_TalonSRX(3);
   private final WPI_TalonSRX m_leftMotor2 = new WPI_TalonSRX(4);
   private final WPI_TalonSRX m_rightMotor2 = new WPI_TalonSRX(5);
-  
+
   private final DifferentialDrive robotDrive = new DifferentialDrive(m_leftMotor1, m_rightMotor1);
   
   public final static XboxController primaryDriver = new XboxController(0);
@@ -76,8 +76,8 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
 
-      double forwardSpeed;
-      double rotationSpeed;
+      double forwardSpeed = 0;
+      double rotationSpeed = 0;
 
 
       if (primaryDriver.getYButton()) {
@@ -112,6 +112,7 @@ public class Robot extends TimedRobot {
       }
 
       // Use our forward/turn speeds to control the drivetrain
+      robotDrive.arcadeDrive(forwardSpeed, rotationSpeed);
 
   }
 }
