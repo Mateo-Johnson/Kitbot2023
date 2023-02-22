@@ -34,18 +34,18 @@ import edu.wpi.first.net.PortForwarder;
 public class Robot extends TimedRobot {
 
   
-  // Constants such as camera and target height stored. Change per robot and goal!
-  final double CAMERA_HEIGHT_METERS = Units.inchesToMeters(9);
-  final double TARGET_HEIGHT_METERS = Units.inchesToMeters(3);
+  // Constants such as camera and target height stored. Change per robot and goa!
 
   // Angle between horizontal and the camera.
-  final double CAMERA_PITCH_RADIANS = Units.degreesToRadians(0);
-
   // How far from the target we want to be
+  final double CAMERA_HEIGHT_METERS = Units.inchesToMeters(9);
+  final double TARGET_HEIGHT_METERS = Units.inchesToMeters(3);
+  final double CAMERA_PITCH_RADIANS = Units.degreesToRadians(0);
   final double GOAL_RANGE_METERS = Units.feetToMeters(2);
 
   // Change this to match the name of your camera
   PhotonCamera camera = new PhotonCamera("Metrobots3324");
+  PhotonCamera camera2 = new PhotonCamera("Metrobots3324_2");
 
   // PID constants should be tuned per robot
   final double P_GAIN = 0.1;
@@ -66,17 +66,18 @@ public class Robot extends TimedRobot {
   private final DifferentialDrive robotDrive = new DifferentialDrive(m_leftMotor1, m_rightMotor1);
   
   public final static XboxController primaryDriver = new XboxController(0);
+  public final static XboxController secondaryDriver = new XboxController(1);
 
   @Override
   public void robotInit() {
+
+    PortForwarder.add(5800, "photonvision.local", 5800);
 
     m_rightMotor1.setInverted(false);
     m_leftMotor1.setInverted(false);
 
     m_rightMotor2.follow(m_rightMotor1);
     m_leftMotor2.follow(m_leftMotor1);
-
-    PortForwarder.add(5800, "photonvision.local", 5800);
 
   }
 
@@ -94,7 +95,7 @@ public class Robot extends TimedRobot {
       double latencySeconds = result.getLatencyMillis() / 1000.0;
 
 
-      if (primaryDriver.getYButton()) {
+      if (primaryDriver.getXButton()) {
           // Vision-alignment mode
           // Query the latest result from PhotonVision
 
@@ -111,6 +112,7 @@ public class Robot extends TimedRobot {
               // -1.0 required to ensure positive PID controller effort _increases_ range
               forwardSpeed = -controller.calculate(range, GOAL_RANGE_METERS);
               rotationSpeed = -turnController.calculate(result.getBestTarget().getYaw(), 0);
+
           } else {
               // If we have no targets, stay still.
               forwardSpeed = 0;
@@ -168,7 +170,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // We need to invert one side of the drivetrain so that positive voltages
     // result in both sides moving forward. Depending on how your robot's
-    // gearbox is constructed, you might have to inve`rt the left side instead.
+    // gearbox is constructed, you might have to invert the left side instead.
     m_rightMotor1.setInverted(false);
     m_leftMotor1.setInverted(false);
 
@@ -192,4 +194,6 @@ public class Robot extends TimedRobot {
     // visionmovement.vision();
 
   }
-}  */
+}  
+
+*/
