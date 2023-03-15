@@ -28,7 +28,6 @@ public class Robot extends TimedRobot {
     private double previousError = 0.0;
 
     // Constants for Limelight camera
-    private final double kImageWidth = 320.0; // Width of the camera image in pixels
     private final double kImageHeight = 240.0; // Height of the camera image in pixels
     private final double kVerticalFOV = 49.7; // Vertical field of view of the camera in degrees
     private final double kTagSize = 0.1778; // Size of the AprilTag in meters (7 inches)
@@ -85,7 +84,6 @@ public class Robot extends TimedRobot {
     double ty = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
     double tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
     double ta = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ta").getDouble(0);
-    double ts = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ts").getDouble(0);
 
 
     if (tv == 1){
